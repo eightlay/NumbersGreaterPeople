@@ -7,4 +7,9 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
+    volumes:
+      - ngp_data:/usr/src/app/data/
     restart: always
+
+volumes:
+  ngp_data:

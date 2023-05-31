@@ -66,13 +66,24 @@ async def _check(
         return
 
 
+async def delete_status(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Delete status update"""
+    context.bot.delete_message(
+        chat_id=update.message.chat_id,
+        message_id=update.message.message_id,
+    )
+
+
 def main() -> None:
     """Start the bot."""
-    persistence = PicklePersistence(filepath="ngp.data", update_interval=1)
+    persistence = PicklePersistence(
+        filepath="/usr/src/app/data/ngp.data", update_interval=60
+    )
     application = (
         Application.builder().token(os.getenv("TOKEN")).persistence(persistence).build()
     )
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, check))
+    application.add_handler(MessageHandler(filters.StatusUpdate.ALL, delete_status))
     application.run_polling(allowed_updates=Update.ALL_TYPES)
 
 
