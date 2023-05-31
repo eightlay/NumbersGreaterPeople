@@ -30,9 +30,6 @@ class FibonacciStorage(Storage):
     def _defaults() -> FibonacciStorage:
         return FibonacciStorage(0, 1, 2)
 
-    def to_message(self) -> str:
-        return f"*№{self.index}*\n\n{self.current}"
-
     def initial_messages(self) -> list[str]:
         return [
             (
