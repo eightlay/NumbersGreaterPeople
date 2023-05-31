@@ -47,6 +47,7 @@ async def _check(
                 msg,
                 message_thread_id=topic,
                 parse_mode="Markdown",
+                disable_notification=True,
             )
 
     correct = topics[topic].update(update.message.text)
@@ -62,15 +63,25 @@ async def _check(
             topics[topic].to_message(),
             message_thread_id=topic,
             parse_mode="Markdown",
+            disable_notification=True,
         )
         return
 
 
 async def delete_status(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Delete status update"""
-    context.bot.delete_message(
+    await context.bot.delete_message(
         chat_id=update.message.chat_id,
         message_id=update.message.message_id,
+    )
+    msg = await context.bot.send_message(
+        chat_id=update.message.chat_id,
+        text="Hi",
+        disable_notification=True,
+    )
+    await context.bot.delete_message(
+        chat_id=msg.chat_id,
+        message_id=msg.message_id,
     )
 
 
