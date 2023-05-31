@@ -1,6 +1,9 @@
 # Env vars
 .env
 
+# Data
+ngp_data/
+
 # Logs
 logs/
 
