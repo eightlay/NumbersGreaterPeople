@@ -76,9 +76,7 @@ async def delete_status(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 
 def main() -> None:
     """Start the bot."""
-    persistence = PicklePersistence(
-        filepath="/usr/src/ngp/data/ngp.data", update_interval=60
-    )
+    persistence = PicklePersistence(filepath="ngp_data/ngp.data", update_interval=1)
     application = (
         Application.builder().token(os.getenv("TOKEN")).persistence(persistence).build()
     )

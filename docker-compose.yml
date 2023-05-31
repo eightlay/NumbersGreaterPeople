@@ -8,8 +8,5 @@ services:
     env_file:
       - .env
     volumes:
-      - ngp_data:/usr/src/npg/data/
+      - ./ngp_data:/home/ngp/ngp_data
     restart: always
-
-volumes:
-  ngp_data:
